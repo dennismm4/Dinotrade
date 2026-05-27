@@ -12,6 +12,17 @@ This is a static dashboard only. It does not place trades, connect to Binance, c
 
 Open `index.html` in a browser to view it.
 
+## Dashboard Features
+
+- Portfolio overview with simulated equity and risk usage.
+- Exness MT5 and Binance Spot bot cards with paper-run and pause controls.
+- Simulated open positions table for forex and crypto markets.
+- Signal scanner with confidence scores and rejection notes.
+- Alerts for live-trading locks, sizing, and credential safety.
+- Adjustable risk controls for daily stop, position size, and loss-pause rules.
+- Trade journal for recording simulated decisions.
+- API readiness panel for dashboard, Binance testnet, MT5 demo, and live mode.
+
 ## First Build Goals
 
 1. Track capital allocation and bot status.

@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trade Command Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar" aria-label="Project navigation">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">TC</div>
+        <div>
+          <h1>Trade Command</h1>
+          <p>Two-bot capital dashboard</p>
+        </div>
+      </div>
+
+      <nav class="nav-list" aria-label="Dashboard sections">
+        <a class="active" href="#overview">Overview</a>
+        <a href="#bots">Bots</a>
+        <a href="#positions">Positions</a>
+        <a href="#risk">Risk</a>
+        <a href="#journal">Journal</a>
+        <a href="#setup">Setup</a>
+      </nav>
+
+      <section class="capital-box" aria-label="Capital allocation">
+        <span>Total pilot capital</span>
+        <strong>$50.00</strong>
+        <div class="allocation-bar" aria-hidden="true">
+          <span class="forex-share"></span>
+          <span class="crypto-share"></span>
+        </div>
+        <div class="legend">
+          <span><i class="dot forex"></i>Exness $30</span>
+          <span><i class="dot crypto"></i>Binance $20</span>
+        </div>
+      </section>
+    </aside>
+
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Phase 1</p>
+          <h2>Proof-of-concept trading control room</h2>
+        </div>
+        <div class="mode-pill">
+          <span class="pulse"></span>
+          Simulation only
+        </div>
+      </header>
+
+      <section id="overview" class="metrics-grid" aria-label="Portfolio metrics">
+        <article class="metric">
+          <span>Starting capital</span>
+          <strong>$50.00</strong>
+          <p>Split across forex and crypto bots.</p>
+        </article>
+        <article class="metric">
+          <span>Simulated equity</span>
+          <strong id="equityValue">$50.72</strong>
+          <p id="equityNote">+$0.72 today across both bots.</p>
+        </article>
+        <article class="metric warning">
+          <span>Risk used today</span>
+          <strong id="riskUsed">34%</strong>
+          <p>Daily shutdown triggers at $2.50 loss.</p>
+        </article>
+        <article class="metric">
+          <span>Automation mode</span>
+          <strong id="automationMode">Paper</strong>
+          <p id="automationNote">Both bots are blocked from live orders.</p>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel performance-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Projected path</p>
+              <h3>30-day pilot range</h3>
+            </div>
+            <select id="scenarioSelect" aria-label="Projected scenario">
+              <option value="conservative">Conservative</option>
+              <option value="flat">Flat</option>
+              <option value="stress">Stress test</option>
+            </select>
+          </div>
+          <div class="chart" id="projectionChart" aria-label="Projection chart"></div>
+          <div class="chart-labels">
+            <span>Day 1</span>
+            <span>Day 15</span>
+            <span>Day 30</span>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Guardrails</p>
+              <h3>Capital protection</h3>
+            </div>
+          </div>
+          <ul class="risk-list">
+            <li>
+              <span>Max forex risk per trade</span>
+              <strong>$0.30</strong>
+            </li>
+            <li>
+              <span>Max crypto risk per trade</span>
+              <strong>$0.20</strong>
+            </li>
+            <li>
+              <span>Daily loss shutdown</span>
+              <strong>$2.50</strong>
+            </li>
+            <li>
+              <span>Leverage cap</span>
+              <strong>1:5</strong>
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="bots" class="bot-grid" aria-label="Bot cards">
+        <article class="bot-card forex-card">
+          <div class="bot-topline">
+            <div>
+              <p class="eyebrow">Forex bot</p>
+              <h3>Exness MT5</h3>
+            </div>
+            <span class="status ready">Planned</span>
+          </div>
+          <dl>
+            <div>
+              <dt>Capital</dt>
+              <dd>$30.00</dd>
+            </div>
+            <div>
+              <dt>Markets</dt>
+              <dd>EUR/USD, GBP/USD</dd>
+            </div>
+            <div>
+              <dt>Mode</dt>
+              <dd>Demo first</dd>
+            </div>
+          </dl>
+          <div class="strategy-box">
+            <span>Starter strategy</span>
+            <p>London/New York session trend filter with ATR stop-loss and fixed fractional risk.</p>
+          </div>
+          <div class="bot-actions">
+            <button class="control-button" data-bot="forex" data-action="pause">Pause</button>
+            <button class="control-button primary" data-bot="forex" data-action="paper">Paper run</button>
+          </div>
+        </article>
+
+        <article class="bot-card crypto-card">
+          <div class="bot-topline">
+            <div>
+              <p class="eyebrow">Crypto bot</p>
+              <h3>Binance Spot</h3>
+            </div>
+            <span class="status ready">Planned</span>
+          </div>
+          <dl>
+            <div>
+              <dt>Capital</dt>
+              <dd>$20.00</dd>
+            </div>
+            <div>
+              <dt>Markets</dt>
+              <dd>BTC/USDT, ETH/USDT</dd>
+            </div>
+            <div>
+              <dt>Mode</dt>
+              <dd>Testnet first</dd>
+            </div>
+          </dl>
+          <div class="strategy-box">
+            <span>Starter strategy</span>
+            <p>Spot-only trend and mean-reversion filter with no margin, futures, or withdrawals.</p>
+          </div>
+          <div class="bot-actions">
+            <button class="control-button" data-bot="crypto" data-action="pause">Pause</button>
+            <button class="control-button primary" data-bot="crypto" data-action="paper">Paper run</button>
+          </div>
+        </article>
+      </section>
+
+      <section id="positions" class="panel full-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Market exposure</p>
+            <h3>Simulated open positions</h3>
+          </div>
+          <span class="status live-sim">Live prices mocked</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Bot</th>
+                <th>Market</th>
+                <th>Side</th>
+                <th>Size</th>
+                <th>Entry</th>
+                <th>Stop</th>
+                <th>P/L</th>
+              </tr>
+            </thead>
+            <tbody id="positionsTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Signal scanner</p>
+              <h3>Next trade candidates</h3>
+            </div>
+          </div>
+          <div class="signal-list" id="signalList"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Alerts</p>
+              <h3>What needs attention</h3>
+            </div>
+          </div>
+          <ul class="alert-list" id="alertList"></ul>
+        </article>
+      </section>
+
+      <section id="risk" class="panel full-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Risk engine</p>
+            <h3>Rules before real money</h3>
+          </div>
+        </div>
+        <div class="rules-grid">
+          <label>
+            <input type="checkbox" checked />
+            Paper trade before live execution
+          </label>
+          <label>
+            <input type="checkbox" checked />
+            Pause after three consecutive losses
+          </label>
+          <label>
+            <input type="checkbox" checked />
+            Disable withdrawals on Binance API keys
+          </label>
+          <label>
+            <input type="checkbox" checked />
+            Require stop-loss for every MT5 position
+          </label>
+        </div>
+        <div class="risk-controls">
+          <label>
+            <span>Daily loss stop</span>
+            <input id="dailyStop" type="range" min="1" max="5" value="2.5" step="0.5" />
+            <strong id="dailyStopValue">$2.50</strong>
+          </label>
+          <label>
+            <span>Max position size</span>
+            <input id="positionSize" type="range" min="5" max="30" value="15" step="5" />
+            <strong id="positionSizeValue">$15</strong>
+          </label>
+          <label>
+            <span>Consecutive-loss pause</span>
+            <input id="lossPause" type="range" min="1" max="5" value="3" step="1" />
+            <strong id="lossPauseValue">3 losses</strong>
+          </label>
+        </div>
+      </section>
+
+      <section id="journal" class="panel full-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Trade journal</p>
+            <h3>Recent simulated decisions</h3>
+          </div>
+          <button class="control-button" id="addJournalEntry">Add mock trade</button>
+        </div>
+        <div class="journal-list" id="journalList"></div>
+      </section>
+
+      <section class="panel full-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">API readiness</p>
+            <h3>Before live connection</h3>
+          </div>
+        </div>
+        <div class="readiness-grid">
+          <div class="readiness-item done">
+            <strong>Dashboard</strong>
+            <span>Static control room is working locally.</span>
+          </div>
+          <div class="readiness-item pending">
+            <strong>Binance testnet key</strong>
+            <span>Needed before crypto paper orders.</span>
+          </div>
+          <div class="readiness-item pending">
+            <strong>MT5 demo terminal</strong>
+            <span>Needed before Exness demo orders.</span>
+          </div>
+          <div class="readiness-item locked">
+            <strong>Live mode</strong>
+            <span>Blocked until paper logs are clean.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="setup" class="panel full-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Build checklist</p>
+            <h3>Connection roadmap</h3>
+          </div>
+        </div>
+        <ol class="timeline">
+          <li>
+            <strong>Dashboard skeleton</strong>
+            <span>Track allocations, bot state, and risk rules.</span>
+          </li>
+          <li>
+            <strong>Backtesting core</strong>
+            <span>Run strategies against historical candles before any API key is used.</span>
+          </li>
+          <li>
+            <strong>Binance testnet connector</strong>
+            <span>Read prices and place fake spot orders through official endpoints.</span>
+          </li>
+          <li>
+            <strong>MT5 demo connector</strong>
+            <span>Connect to a demo terminal and validate order sizing, stops, and logs.</span>
+          </li>
+          <li>
+            <strong>Live pilot lock</strong>
+            <span>Only unlock live mode after logs and risk checks are clean.</span>
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
